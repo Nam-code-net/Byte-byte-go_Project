@@ -3,6 +3,7 @@ import Sidebar from "@/components/Sidebar";
 import ChapterContent from "@/components/ChapterContent";
 import ArchitectureDiagram from "@/components/ArchitectureDiagram";
 import HeroSection from "@/components/HeroSection";
+import ThemeToggle from "@/components/ThemeToggle";
 import { motion } from "framer-motion";
 
 interface Chapter {
@@ -190,7 +191,8 @@ export default function Home() {
   ];
 
   return (
-    <div className="relative flex min-h-screen bg-background overflow-hidden">
+    <div className="relative flex min-h-screen bg-background overflow-hidden byte-grid">
+      <ThemeToggle />
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-24 -left-24 h-80 w-80 rounded-full bg-blue-500/20 blur-3xl" />
         <div className="absolute top-1/4 -right-24 h-96 w-96 rounded-full bg-cyan-400/15 blur-3xl" />

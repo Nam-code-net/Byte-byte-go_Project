@@ -191,6 +191,14 @@
     opacity: 0;
   }
 
+  .byte-grid {
+    background-image:
+      linear-gradient(to right, color-mix(in oklch, var(--border) 45%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklch, var(--border) 45%, transparent) 1px, transparent 1px);
+    background-size: 32px 32px;
+    background-position: center;
+  }
+
   /* Stagger animation delays */
   .stagger-1 { animation-delay: 0.1s; }
   .stagger-2 { animation-delay: 0.2s; }

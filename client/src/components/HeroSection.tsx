@@ -68,6 +68,17 @@ export default function HeroSection({
         }}
         transition={{ type: "tween", duration: 0.2 }}
       />
+      <motion.div
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.26 }}
+        transition={{ delay: 0.15, duration: 0.6 }}
+      />
 
       {/* Content */}
       <motion.div
@@ -160,6 +171,13 @@ export default function HeroSection({
                 className="bg-white/10 backdrop-blur-md rounded-lg p-4 border border-white/20"
                 variants={itemVariants}
                 whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.15)" }}
+                animate={{ y: [0, -4, 0] }}
+                transition={{
+                  duration: 2.8,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: idx * 0.25,
+                }}
               >
                 <motion.div
                   className="text-2xl font-bold"
