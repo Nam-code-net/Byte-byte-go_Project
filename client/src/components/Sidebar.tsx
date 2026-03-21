@@ -60,7 +60,7 @@ export default function Sidebar({
 
       {/* Sidebar */}
       <motion.aside
-        className="fixed md:relative w-[86vw] max-w-80 md:w-80 h-screen bg-sidebar/95 text-sidebar-foreground border-r border-sidebar-border overflow-y-auto transition-transform duration-300 z-40 backdrop-blur-sm"
+        className="fixed md:sticky md:top-0 w-[86vw] max-w-80 md:w-80 h-screen bg-sidebar/95 text-sidebar-foreground border-r border-sidebar-border overflow-y-auto transition-transform duration-300 z-40 backdrop-blur-sm"
         variants={sidebarVariants}
         initial={isMobile ? "hidden" : "visible"}
         animate={isMobile ? (isOpen ? "visible" : "hidden") : "visible"}
