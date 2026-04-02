@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <defs>
+    <linearGradient id="p1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <linearGradient id="p2" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#a5b4fc" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#c4b5fd" stop-opacity="0.5"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="24" fill="url(#p2)"/>
+  <rect x="18" y="22" width="84" height="58" rx="8" fill="white" stroke="url(#p1)" stroke-width="2.5"/>
+  <rect x="18" y="22" width="84" height="14" rx="8" fill="url(#p1)"/>
+  <circle cx="28" cy="29" r="3" fill="white" fill-opacity="0.85"/>
+  <circle cx="38" cy="29" r="3" fill="white" fill-opacity="0.55"/>
+  <circle cx="48" cy="29" r="3" fill="white" fill-opacity="0.35"/>
+  <path d="M28 48h64M28 58h48M28 68h56" stroke="url(#p1)" stroke-width="3" stroke-linecap="round" opacity="0.35"/>
+  <rect x="26" y="44" width="36" height="6" rx="3" fill="url(#p1)" opacity="0.5"/>
+  <rect x="26" y="54" width="52" height="6" rx="3" fill="url(#p1)" opacity="0.35"/>
+  <rect x="26" y="64" width="44" height="6" rx="3" fill="url(#p1)" opacity="0.25"/>
+  <path d="M24 92h72" stroke="url(#p1)" stroke-width="4" stroke-linecap="round" opacity="0.25"/>
+  <circle cx="60" cy="92" r="10" fill="url(#p1)" opacity="0.9"/>
+  <path d="M56 92l3 3 6-7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

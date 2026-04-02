@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <defs>
+    <linearGradient id="d1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="d2" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#a5f3fc" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#cffafe" stop-opacity="0.5"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="24" fill="url(#d2)"/>
+  <ellipse cx="60" cy="34" rx="32" ry="12" fill="url(#d1)" opacity="0.95"/>
+  <path d="M28 34v20c0 6.6 14.3 12 32 12s32-5.4 32-12V34" fill="white" stroke="url(#d1)" stroke-width="2.5"/>
+  <path d="M28 54v20c0 6.6 14.3 12 32 12s32-5.4 32-12V54" fill="white" stroke="url(#d1)" stroke-width="2.5"/>
+  <path d="M28 74v12c0 6.6 14.3 12 32 12s32-5.4 32-12V74" fill="white" stroke="url(#d1)" stroke-width="2.5"/>
+  <ellipse cx="60" cy="34" rx="32" ry="12" fill="none" stroke="url(#d1)" stroke-width="2.5"/>
+  <rect x="38" y="88" width="44" height="14" rx="4" fill="white" stroke="url(#d1)" stroke-width="2"/>
+  <rect x="42" y="92" width="14" height="6" rx="2" fill="url(#d1)" opacity="0.45"/>
+  <rect x="60" y="92" width="18" height="6" rx="2" fill="url(#d1)" opacity="0.3"/>
+</svg>

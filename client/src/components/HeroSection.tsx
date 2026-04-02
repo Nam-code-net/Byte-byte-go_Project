@@ -2,19 +2,25 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { 
+  Sparkles, 
+  ArrowRight, 
+  Play,
+  Code2,
+  Layers,
+  Database,
+  Zap
+} from "lucide-react";
 
-interface HeroSectionProps {
-  backgroundImage?: string;
-}
-
-export default function HeroSection({
-  backgroundImage = "https://d2xsxph8kpxj0f.cloudfront.net/310519663161807068/VXk9pdyGTXCXCBgErm8ZEv/hero-banner-KCR55HtoWgUwVv5ZFPdsvS.webp",
-}: HeroSectionProps) {
+export default function HeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      setMousePosition({ 
+        x: (e.clientX / window.innerWidth - 0.5) * 20, 
+        y: (e.clientY / window.innerHeight - 0.5) * 20 
+      });
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -26,171 +32,232 @@ export default function HeroSection({
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.12,
         delayChildren: 0.1,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6 },
+      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
     },
   };
 
+  const features = [
+    { icon: <Layers className="w-5 h-5" />, label: "3-Tier Architecture" },
+    { icon: <Database className="w-5 h-5" />, label: "EF Core & Dapper" },
+    { icon: <Code2 className="w-5 h-5" />, label: "DTO & AutoMapper" },
+    { icon: <Zap className="w-5 h-5" />, label: "Performance" },
+  ];
+
   return (
     <motion.div
-      className="relative h-[560px] sm:h-[620px] bg-cover bg-center overflow-hidden"
-      style={{
-        backgroundImage: `url('${backgroundImage}')`,
-        backgroundAttachment: "scroll",
-      }}
+      className="relative min-h-[600px] md:min-h-[700px] overflow-hidden flex items-center justify-center"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 0.5 }}
     >
-      {/* Gradient Overlay */}
+      {/* Animated Background */}
+      <div className="absolute inset-0 gradient-bg" />
+      
+      {/* Floating Orbs */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-blue-900/80 via-blue-700/60 to-slate-900/70"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.8 }}
+        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-primary/20 blur-[120px]"
+        animate={{
+          x: mousePosition.x * 2,
+          y: mousePosition.y * 2,
+        }}
+        transition={{ type: "tween", duration: 0.5 }}
+      />
+      <motion.div
+        className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-accent/20 blur-[100px]"
+        animate={{
+          x: -mousePosition.x * 1.5,
+          y: -mousePosition.y * 1.5,
+        }}
+        transition={{ type: "tween", duration: 0.5 }}
+      />
+      <motion.div
+        className="absolute top-1/2 right-1/3 w-64 h-64 rounded-full bg-chart-3/15 blur-[80px]"
+        animate={{
+          x: mousePosition.x,
+          y: mousePosition.y,
+        }}
+        transition={{ type: "tween", duration: 0.5 }}
       />
 
-      {/* Animated Background Pattern */}
-      <motion.div
-        className="absolute inset-0 opacity-10"
+      {/* Grid Pattern */}
+      <div 
+        className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]"
         style={{
-          backgroundImage: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255,255,255,0.16) 0%, transparent 44%)`,
+          backgroundImage: `
+            linear-gradient(to right, currentColor 1px, transparent 1px),
+            linear-gradient(to bottom, currentColor 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px'
         }}
-        transition={{ type: "tween", duration: 0.2 }}
-      />
-      <motion.div
-        className="absolute inset-0"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-        }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.26 }}
-        transition={{ delay: 0.15, duration: 0.6 }}
       />
 
       {/* Content */}
       <motion.div
-        className="absolute inset-0 flex items-center justify-center"
+        className="relative z-10 text-center px-4 w-full max-w-5xl mx-auto"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        <div className="text-center text-white z-10 px-4 w-full max-w-5xl">
-          <motion.div variants={itemVariants} className="mb-4">
-            <Badge className="px-4 py-2 text-sm font-semibold border border-white/25 bg-white/15 backdrop-blur-md text-white rounded-full">
-              ByteByteGo Style - System Design Masterclass
-            </Badge>
-          </motion.div>
-
-          <motion.h1
-            variants={itemVariants}
-            className="text-4xl sm:text-5xl md:text-7xl font-display font-bold mb-4 leading-tight"
+        {/* Badge */}
+        <motion.div variants={itemVariants} className="mb-6">
+          <Badge 
+            className="px-5 py-2.5 text-sm font-semibold rounded-full
+                       glass shadow-glow hover:scale-105 transition-transform cursor-default"
           >
-            Master System
-            <motion.span
-              className="block bg-gradient-to-r from-cyan-200 via-blue-200 to-white bg-clip-text text-transparent"
-              initial={{ backgroundPosition: "0% center" }}
-              animate={{ backgroundPosition: "100% center" }}
-              transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
-              style={{ backgroundSize: "200% 200%" }}
-            >
-              Design
-            </motion.span>
-          </motion.h1>
+            <Sparkles className="w-4 h-4 mr-2 text-accent animate-pulse" />
+            System Design Masterclass 2024
+          </Badge>
+        </motion.div>
 
-          <motion.p
-            variants={itemVariants}
-            className="text-base sm:text-lg md:text-2xl text-blue-100/95 mb-8 max-w-2xl mx-auto"
-          >
-            Learn how to design scalable, reliable, and maintainable systems like the experts
-          </motion.p>
+        {/* Main Title */}
+        <motion.h1
+          variants={itemVariants}
+          className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-6 leading-[1.1]"
+        >
+          <span className="text-zinc-900 dark:text-zinc-50">Xây dựng</span>
+          <br />
+          <span className="gradient-text">System Design</span>
+          <br />
+          <span className="text-zinc-700 dark:text-zinc-200 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+            Chuyên nghiệp
+          </span>
+        </motion.h1>
 
+        {/* Subtitle */}
+        <motion.p
+          variants={itemVariants}
+          className="text-lg md:text-xl text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto mb-10 leading-relaxed"
+        >
+          Học cách thiết kế hệ thống scalable, reliable và maintainable
+          từ những chuyên gia hàng đầu trong ngành
+        </motion.p>
+
+        {/* CTA Buttons */}
+        <motion.div
+          variants={itemVariants}
+          className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+        >
           <motion.div
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            whileHover={{ scale: 1.02, y: -2 }}
+            whileTap={{ scale: 0.98 }}
           >
-            <motion.div
-              whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(0,0,0,0.2)" }}
-              whileTap={{ scale: 0.95 }}
+            <Button
+              size="lg"
+              className="h-14 px-8 rounded-2xl gradient-primary text-white font-bold text-base
+                         shadow-glow hover:shadow-xl transition-all duration-300
+                         flex items-center gap-2"
+              onClick={() => {
+                const el = document.getElementById("chapter-content");
+                if (!el) return;
+                const rect = el.getBoundingClientRect();
+                window.scrollTo({ top: window.scrollY + rect.top - 80, behavior: "smooth" });
+              }}
             >
-              <Button
-                size="lg"
-                className="px-8 bg-white text-blue-700 hover:bg-blue-50 font-bold"
-                onClick={() =>
-                  document
-                    .getElementById("chapter-content")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-              >
-                Start Learning
-              </Button>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Button
-                size="lg"
-                variant="outline"
-                className="px-8 bg-white/10 text-white border-white/35 hover:bg-white/20"
-                onClick={() =>
-                  document
-                    .getElementById("course-sidebar")
-                    ?.scrollIntoView({ behavior: "smooth", block: "start" })
-                }
-              >
-                View Curriculum
-              </Button>
-            </motion.div>
+              <Play className="w-5 h-5" />
+              Bắt đầu học ngay
+              <ArrowRight className="w-5 h-5" />
+            </Button>
           </motion.div>
-
-          {/* Floating Stats */}
+          
           <motion.div
-            className="grid grid-cols-3 gap-3 sm:gap-4 mt-10 sm:mt-12 max-w-md mx-auto"
-            variants={containerVariants}
+            whileHover={{ scale: 1.02, y: -2 }}
+            whileTap={{ scale: 0.98 }}
           >
-            {[
-              { label: "Chapters", value: "10+" },
-              { label: "Concepts", value: "50+" },
-              { label: "Diagrams", value: "100+" },
-            ].map((stat, idx) => (
+            <Button
+              size="lg"
+              variant="outline"
+              className="h-14 px-8 rounded-2xl font-bold text-base
+                         glass border-2 hover:bg-accent/5 transition-all duration-300"
+              onClick={() => {
+                const el = document.getElementById("course-sidebar");
+                if (!el) return;
+                const rect = el.getBoundingClientRect();
+                window.scrollTo({ top: window.scrollY + rect.top - 80, behavior: "smooth" });
+              }}
+            >
+              Xem chương trình
+            </Button>
+          </motion.div>
+        </motion.div>
+
+        {/* Feature Pills */}
+        <motion.div
+          variants={itemVariants}
+          className="flex flex-wrap justify-center gap-3"
+        >
+          {features.map((feature, idx) => (
+            <motion.div
+              key={idx}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-full glass
+                         text-sm font-medium text-foreground/80"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.8 + idx * 0.1 }}
+              whileHover={{ scale: 1.05, y: -2 }}
+            >
+              <span className="text-primary">{feature.icon}</span>
+              {feature.label}
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Floating Stats */}
+        <motion.div
+          className="grid grid-cols-3 gap-4 mt-16 max-w-lg mx-auto"
+          variants={itemVariants}
+        >
+          {[
+            { value: "10+", label: "Chapters", delay: 0 },
+            { value: "50+", label: "Concepts", delay: 0.1 },
+            { value: "100+", label: "Diagrams", delay: 0.2 },
+          ].map((stat, idx) => (
+            <motion.div
+              key={idx}
+              className="text-center p-4 rounded-2xl glass"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1 + stat.delay, type: "spring" }}
+              whileHover={{ y: -5, scale: 1.02 }}
+            >
               <motion.div
-                key={idx}
-                className="bg-white/10 backdrop-blur-md rounded-lg p-4 border border-white/20"
-                variants={itemVariants}
-                whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.15)" }}
-                animate={{ y: [0, -4, 0] }}
-                transition={{
-                  duration: 2.8,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: idx * 0.25,
-                }}
+                className="text-3xl md:text-4xl font-display gradient-text"
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1.2 + stat.delay, type: "spring" }}
               >
-                <motion.div
-                  className="text-2xl font-bold"
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.8 + idx * 0.1, type: "spring" }}
-                >
-                  {stat.value}
-                </motion.div>
-                <div className="text-xs text-blue-100">{stat.label}</div>
+                {stat.value}
               </motion.div>
-            ))}
-          </motion.div>
+              <div className="text-xs md:text-sm text-muted-foreground mt-1 uppercase tracking-wider font-medium">
+                {stat.label}
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </motion.div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <div className="w-6 h-10 rounded-full border-2 border-foreground/20 flex justify-center pt-2">
+          <motion.div
+            className="w-1.5 h-1.5 rounded-full bg-primary"
+            animate={{ opacity: [1, 0, 1], y: [0, 12, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          />
         </div>
       </motion.div>
     </motion.div>

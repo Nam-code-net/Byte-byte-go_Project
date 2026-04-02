@@ -14,30 +14,69 @@ export default function ThemeToggle() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: -8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35 }}
-      className="fixed right-4 top-4 z-50"
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.3, delay: 0.5 }}
+      className="fixed right-4 top-4 z-[60]"
     >
-      <Button
+      <motion.button
         type="button"
-        variant="outline"
         onClick={toggleTheme}
-        className="h-10 rounded-full border-border/70 bg-background/80 px-3 shadow-lg backdrop-blur-md"
+        className="
+          relative w-14 h-14 rounded-2xl
+          glass shadow-glow
+          flex items-center justify-center
+          overflow-hidden
+          group
+        "
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
         aria-label="Toggle color theme"
       >
-        {isDark ? (
-          <>
-            <Sun className="size-4 text-amber-400" />
-            <span className="text-xs">Light</span>
-          </>
-        ) : (
-          <>
-            <Moon className="size-4 text-blue-600" />
-            <span className="text-xs">Dark</span>
-          </>
-        )}
-      </Button>
+        {/* Background Glow */}
+        <motion.div
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          style={{
+            background: isDark 
+              ? "linear-gradient(135deg, hsl(250 100% 72% / 0.2), hsl(330 100% 72% / 0.2))"
+              : "linear-gradient(135deg, hsl(250 100% 65% / 0.2), hsl(330 100% 65% / 0.2))",
+          }}
+        />
+
+        {/* Sun Icon */}
+        <motion.div
+          initial={false}
+          animate={{
+            scale: isDark ? 0 : 1,
+            rotate: isDark ? -90 : 0,
+            opacity: isDark ? 0 : 1,
+          }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+          className="absolute"
+        >
+          <Sun className="w-6 h-6 text-amber-500" />
+        </motion.div>
+
+        {/* Moon Icon */}
+        <motion.div
+          initial={false}
+          animate={{
+            scale: isDark ? 1 : 0,
+            rotate: isDark ? 0 : 90,
+            opacity: isDark ? 1 : 0,
+          }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+          className="absolute"
+        >
+          <Moon className="w-6 h-6 text-violet-400" />
+        </motion.div>
+
+        {/* Hover Ring Effect */}
+        <motion.div
+          className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-primary/30 transition-colors duration-300"
+          initial={false}
+        />
+      </motion.button>
     </motion.div>
   );
 }
